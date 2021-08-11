@@ -2,7 +2,6 @@ from PIL import Image
 import numpy as np
 from stl import mesh
 
-
 def convert_image(image):
     # convert image to greyscale format
     greyscale_image = Image.open(image).convert('L')
@@ -52,4 +51,5 @@ def convert_image(image):
         for j in range(3):
             surface.vectors[i][j] = facesNp[i][j]
     
+    #surface.save('surface.stl')
     return surface

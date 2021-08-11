@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify, make_response, render_template
-import numpy
+from flask_cors import CORS, cross_origin
 from stl import mesh
 from io import BytesIO
-app = Flask(__name__)
+from image_processer import convert_image
 
+app = Flask(__name__)
+CORS(app)
 
 @app.route("/test")
 def server_test():
@@ -24,9 +26,12 @@ def handle_image():
     file = files.get('file')
     file.save(file.filename)
 
+    #process image
+    convert_image(file)
     # send success message to client
     return jsonify({
         'success': True,
         'file': 'Received'
     })
 # GET request to send the newly created STL file
+# flask_cors.CORS(app, expose_headers='Authorization')
