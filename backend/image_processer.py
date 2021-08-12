@@ -51,5 +51,5 @@ def convert_image(image):
         for j in range(3):
             surface.vectors[i][j] = facesNp[i][j]
     
-    #surface.save('surface.stl')
+    surface.save('surface.stl')
     return surface

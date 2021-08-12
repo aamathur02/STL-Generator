@@ -1,11 +1,13 @@
-from flask import Flask, request, jsonify, make_response, render_template
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS, cross_origin
 from stl import mesh
 from io import BytesIO
 from image_processer import convert_image
+import os
 
 app = Flask(__name__)
 CORS(app)
+stl = None
 
 @app.route("/test")
 def server_test():
@@ -34,4 +36,19 @@ def handle_image():
         'file': 'Received'
     })
 # GET request to send the newly created STL file
+@app.route("/stl", methods=["GET"])
+def get_stl():
+    # if stl is None:
+    #     print(os.getcwd())
+    #     return jsonify ({
+    #         'success': False,
+    #         'file': 'Not Found',
+    #     })
+
+    return send_from_directory(os.getcwd(), 'surface.stl')
+    # output =  BytesIO()
+    # stl._write_ascii(output,"object.stl")
+    # response = make_response(output.getvalue())
+    # return response
+
 # flask_cors.CORS(app, expose_headers='Authorization')
