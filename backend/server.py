@@ -8,6 +8,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+# simple test
 @app.route("/test")
 def server_test():
     return "<p>Server is working!</p>"
@@ -17,7 +18,6 @@ def server_test():
 def handle_image():
     # get the image file from the request
     if 'file' not in request.files:
-        #flash('file not found')
         return jsonify({
         'success': False,
         'file': 'Not Found'
@@ -27,31 +27,24 @@ def handle_image():
     file = files.get('file')
     file.save(file.filename)
 
-    #process image
+    # call to process image
     convert_image(file)
+
     # send success message to client
     return jsonify({
         'success': True,
         'file': 'Received'
     })
+
 # GET request to send the newly created STL file
 @app.route("/stl", methods=["GET"])
 def get_stl():
-    # if stl is None:
-    #     print(os.getcwd())
-    #     return jsonify ({
-    #         'success': False,
-    #         'file': 'Not Found',
-    #     })
-
+    #get the file from memory and return it as response
     return send_from_directory(os.getcwd(), 'surface.stl')
-    # output =  BytesIO()
-    # stl._write_ascii(output,"object.stl")
-    # response = make_response(output.getvalue())
-    # return response
 
+# decorater to resolve caching bigs
 @app.after_request
 def set_cache_preferences(response):
-   response.headers['Cache-Control'] = 'no-store'
-   return response
-# flask_cors.CORS(app, expose_headers='Authorization')
+    # set cache control to no store so that downloads only occur when server.py running
+    response.headers['Cache-Control'] = 'no-store'
+    return response
