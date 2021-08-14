@@ -26,8 +26,7 @@ const ImageUpload = () => {
                     <p>File Name: {image.name}</p>
                     <p>File Type: {image.type}</p>
                     <p>
-                    Last Modified:{" "}
-                    {image.lastModifiedDate.toDateString()}
+                    
                     </p>
        
                 </div>

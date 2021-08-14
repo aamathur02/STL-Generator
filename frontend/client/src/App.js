@@ -7,7 +7,7 @@ import ModelDownload from './components/ModelDownload';
 function App() {
   return (
     <div className="App">
-      
+      <ImageUpload/>
       <ModelDownload/>
     </div>
   );

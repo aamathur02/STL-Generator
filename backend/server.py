@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, session
 from flask_cors import CORS, cross_origin
 from stl import mesh
 from io import BytesIO
@@ -7,7 +7,6 @@ import os
 
 app = Flask(__name__)
 CORS(app)
-stl = None
 
 @app.route("/test")
 def server_test():
@@ -51,4 +50,8 @@ def get_stl():
     # response = make_response(output.getvalue())
     # return response
 
+@app.after_request
+def set_cache_preferences(response):
+   response.headers['Cache-Control'] = 'no-store'
+   return response
 # flask_cors.CORS(app, expose_headers='Authorization')

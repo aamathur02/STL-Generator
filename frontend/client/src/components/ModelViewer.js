@@ -1,10 +1,4 @@
-import React, { Component, useEffect } from "react";
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
-import Stats from "three/examples/jsm/libs/stats.module";
-import {OBJViewer, STLViewer} from 'react-stl-obj-viewer';
-
+import React, { Component } from "react";
 
 class ModelViewer extends Component {
   constructor() {
@@ -33,17 +27,7 @@ class ModelViewer extends Component {
                                    console.log('path' + this.state.stlFile)
                                }} placeholder="test"/>
                     </label>
-                    {this.state.stlFile ?
-                        <STLViewer
-                            onSceneRendered={(element) => {
-                                console.log(element)
-                            }}
-                            sceneClassName="test-scene"
-                            file={this.state.stlFile}
-                            className="obj"
-                            modelColor="#FF0000"/> : null
-
-                    }
+                    
                 </div>
     );
   }
