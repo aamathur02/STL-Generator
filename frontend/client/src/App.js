@@ -9,6 +9,7 @@ function App() {
     <div className="App">
       <ImageUpload/>
       <ModelDownload/>
+      <ModelViewer/>
     </div>
   );
 }
